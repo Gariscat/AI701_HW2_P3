@@ -191,12 +191,14 @@ if __name__ == '__main__':
         ### test_y_pred = un_standardize(test_y_pred, y_mean, y_std)
         # error = mean_squared_error(test_y, test_y_pred, multioutput='raw_values')
         error = (test_y - test_y_pred) ** 2
-
+        l1_dis = np.abs(test_y - test_y_pred)
         # result = deepcopy(config)
         # result.update({'error_avg': np.mean(error), 'error_std': np.std(error)})
         # results.append(str(result)+'\n')
         run.log({'error_avg': np.mean(error)})
         run.log({'error_std': np.std(error)})
+        run.log({'l1_avg': np.mean(l1_dis)})
+        run.log({'l1_std': np.std(l1_dis)})
         run.finish()
     
     
