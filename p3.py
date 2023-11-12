@@ -14,8 +14,8 @@ from copy import deepcopy
 
 LOG_DIR = './logs'
 os.makedirs(LOG_DIR, exist_ok=True)
-BATCH_SIZE = 1024
-SEED = 2711694897
+BATCH_SIZE = 2048
+SEED = 26
 torch.random.manual_seed(SEED)
 np.random.seed(SEED)
 torch.set_float32_matmul_precision('high')
@@ -189,8 +189,9 @@ if __name__ == '__main__':
         test_y_pred = model.forward(torch.tensor(standardize(test_x, x_mean, x_std), dtype=torch.float32))
         test_y_pred = test_y_pred.detach().cpu().flatten().numpy()
         ### test_y_pred = un_standardize(test_y_pred, y_mean, y_std)
-        error = mean_squared_error(test_y_pred, test_y, multioutput='raw_values')
-        
+        # error = mean_squared_error(test_y, test_y_pred, multioutput='raw_values')
+        error = (test_y - test_y_pred) ** 2
+        print(error)
         # result = deepcopy(config)
         # result.update({'error_avg': np.mean(error), 'error_std': np.std(error)})
         # results.append(str(result)+'\n')
