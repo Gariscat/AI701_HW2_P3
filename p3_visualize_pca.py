@@ -8,8 +8,8 @@ test_data = pd.read_csv('Reg_Test.txt', sep=' ', header=None)
 
 train_x = np.array(train_data.iloc[:, :-1])
 train_y = np.array(train_data.iloc[:, -1])
-test_x = np.array(train_data.iloc[:, :-1])
-test_y = np.array(train_data.iloc[:, -1])
+test_x = np.array(test_data.iloc[:, :-1])
+test_y = np.array(test_data.iloc[:, -1])
 
 
 pca = PCA(n_components=2)
